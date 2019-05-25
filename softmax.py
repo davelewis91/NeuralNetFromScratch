@@ -100,7 +100,8 @@ class SoftmaxClassifier(object):
             self.W += -self.stepsize * dW
             self.b += -self.stepsize * db
 
-        print("Training accuracy: {:.02f}".format(self.accuracy(x, y)))
+        self.training_accuracy = self.accuracy(x, y)
+        self.training_loss = self._training_loss[-1]
         return
 
     def predict(self, x):

@@ -28,7 +28,7 @@ def make_spiral_data(N, classes = 3, dimensions = 2):
 
     return x, y
 
-def plot_2d_data(x, y=None, path=None):
+def plot_2d_data(x, y=None, path=None, labels=None):
     """Plots 2D data, optionally colouring by class.
 
     Parameters:
@@ -40,9 +40,15 @@ def plot_2d_data(x, y=None, path=None):
         - fig : matplotlib figure
     """
     fig = plt.figure()
-    plt.scatter(x[:, 0], x[:, 1], c=y, s=40,
-                cmap=plt.cm.Spectral if y else None)
-    plt.xlabel()
+    if any(y): cmap = plt.cm.Spectral
+    else: cmap = None
+    plt.scatter(x[:, 0], x[:, 1], c=y, s=40, cmap=cmap)
+    if not labels:
+        plt.xlabel('dimension 1')
+        plt.ylabel('dimension 2')
+    else:
+        plt.xlabel(labels[0])
+        plt.ylabel(labels[1])
     if path:
         plt.savefig(path, bbox_inches='tight')
     return fig
